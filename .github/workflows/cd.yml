@@ -36,3 +36,8 @@ jobs:
         run: |
           SHORT_SHA=${GITHUB_SHA::7}
           gcloud builds submit --tag us-central1-docker.pkg.dev/notely-463306/notely-ar-repo/notely:$SHORT_SHA .
+
+      - name: deploy app to cloud run
+        run: |
+          SHORT_SHA=${GITHUB_SHA::7}
+          gcloud run deploy notely --image us-central1-docker.pkg.dev/notely-463306/notely-ar-repo/notely:$SHORT_SHA --region us-central1 --allow-unauthenticated --project notely-463306 --max-instances=4
